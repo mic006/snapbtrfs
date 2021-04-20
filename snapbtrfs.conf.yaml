@@ -1,0 +1,31 @@
+# Relative path from btrfs root to store snapshots
+# Snapshots will be stored in a dedicated sub folder, with the name of the subvolume
+# example: 'home' subvolume snapshots will be stored in 'snaps/home/'
+snapshot_dir: snaps
+
+# Umask for the process
+umask: "0o700"
+
+# Default settings for kept snapshots
+# For each periodicity, indicates the number of snapshots to be kept
+# Note: if hourly is 0, a snapshot will be taken only if the previous one is at least a full day old
+default:
+  hourly: 24
+  daily: 7
+  weekly: 5
+  monthly: 3
+  yearly: 0
+
+# btrfs volumes to be managed
+# format: dictionary
+#   key is the path to a btrfs mountpoint
+#   value is a dict:
+#     path: subvolume path relative to the btrfs mountpoint
+#     hourly/daily/weekly/monthly/yearly: override periodicity settings for the given subvolume
+volumes:
+  /mnt/first_btrfs:
+    - path: "@home"
+    - path: "@var"
+      hourly: 0
+  /mnt/second_btrfs:
+    - path: "@data"

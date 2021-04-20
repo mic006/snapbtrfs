@@ -1,0 +1,11 @@
+[Unit]
+Description=snapbtrfs: periodic snapshot of btrfs subvolumes
+
+[Timer]
+OnCalendar=hourly
+AccuracySec=100ms
+# make it persistent, to ensure some calls even if sleeping at each x:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

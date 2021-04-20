@@ -1,0 +1,10 @@
+[Unit]
+Description=snapbtrfs: snapshot of btrfs subvolumes
+After=local-fs.target
+
+[Service]
+Environment="HOME=/root"
+ExecStart=/usr/bin/python -u /utils/snapbtrfs.py
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=snapbtrfs
